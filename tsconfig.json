@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    // Базовые настройки
+    "target": "es2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "types": ["node", "jest"],
+    "rootDir": "./src",
+
+    // Настройки путей (алиасы)
+    "rootDirs": ["./src"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@widgets/*": ["./src/widgets/*"],
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@shared/*": ["./src/shared/*"]
+    },
+
+    // Важные настройки для React
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Строгие проверки TypeScript (рекомендуется)
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+
+    // Дополнительные полезные настройки
+    "allowJs": true,
+    "checkJs": false
+  },
+  // Какие файлы включать в компиляцию
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts"
+    // если используете Vite
+  ],
+
+  // Какие файлы исключить
+  "exclude": ["node_modules", "dist", "build", "coverage", "vite.config.ts"]
+}
