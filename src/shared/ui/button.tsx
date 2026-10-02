@@ -13,12 +13,13 @@ const buttonVariants = cva(
         default: "bg-black text-white hover:bg-black/80",
         outline: "border-gray-400 border-2 hover:bg-gray-200",
         transparent: "text-gray-500 hover:bg-gray-200 hover:text-black",
+        destructive: "text-red-600 hover:bg-red-50 ",
       },
       size: {
         default: "h-9 px-5",
-        xs: "h-10 px-2 py-6",
-        sm: "h-14 px-3.5 py-7.5 hover:scale-105",
-        lg: "h-16 gap-[0.5rem] px-4 py-8 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 hover:scale-105",
+        xs: "h-10 px-6",
+        sm: "h-14 px-7.5",
+        lg: "h-16 gap-[0.5rem] px-9 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 hover:scale-105",
       },
       fill: {
         width: "w-full",

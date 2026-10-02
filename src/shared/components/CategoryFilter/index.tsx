@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/ui/select";
 import { setCategory } from "@/features/FilterProduct/model/filterSlice";
 import { useAppDispatch } from "@/shared/config/hooks";
 import { useState } from "react";

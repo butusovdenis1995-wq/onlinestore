@@ -1,13 +1,12 @@
 import { WrapperCard } from "@/shared/components/WrapperCard";
 import { useGetCategoriesQuery } from "../api/categoriesApi";
+import { Spinner } from "@/shared/ui/spinner";
 
 export function Categories() {
   const { data: categories, isError, isLoading } = useGetCategoriesQuery();
 
-  console.log(categories);
-
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Spinner className="size-12 text-gray-600 mx-auto block my-14" />;
   }
 
   if (isError) {
@@ -23,7 +22,10 @@ export function Categories() {
     <section className="content-px grid grid-cols-4 gap-7 mb-22">
       <h2 className="text-3xl font-bold col-span-4">Категории</h2>
       {categories?.map((category) => (
-        <WrapperCard key={category.id} className="relative overflow-hidden">
+        <WrapperCard
+          key={category.id}
+          className="relative overflow-hidden border border-gray-400 shadow-md"
+        >
           <img
             src={category.image}
             alt="Logo"

@@ -25,14 +25,7 @@ export const headerNav: ILinkNav[] = [
   },
 ];
 
-export const loginButtons: ILoginButtons[] = [
-  {
-    icon: LogOut,
-    label: "Выйти",
-    isAuth: true,
-  },
-  {
-    label: "Войти",
-    isAuth: false,
-  },
-];
+export const loginButtons = {
+  label: "Войти",
+  isAuth: false,
+};

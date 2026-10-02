@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../../shared/config/store";
-import { IInitFilter, IRangePrice } from "./interface";
+import { IFilterProduct, IRangePrice } from "./interface";
+import { IGoods } from "@/widgets/ListGoods/api/interface";
+import { valueMinMax } from "@/shared/lib/valueMinMax/valueMinMax";
 
-const initialState: IInitFilter = {
-  search: "",
-  category: "",
-  rangePrice: {
-    priceMin: "",
-    priceMax: "",
+const initialState: IFilterProduct = {
+  filterProduct: {
+    search: "",
+    category: "",
+    rangePrice: {
+      priceMin: null,
+      priceMax: null,
+    },
+  },
+  filterForRange: {
+    min: null,
+    max: null,
   },
 };
 
@@ -17,22 +25,30 @@ export const filterProductSlice = createSlice({
   initialState,
   reducers: {
     setSearch: (state, action: PayloadAction<string>) => {
-      state.search = action.payload;
+      state.filterProduct.search = action.payload;
+      state.filterProduct.rangePrice = initialState.filterProduct.rangePrice;
     },
     setCategory: (state, action: PayloadAction<string>) => {
-      state.category = action.payload;
+      state.filterProduct.category = action.payload;
+      state.filterProduct.rangePrice = initialState.filterProduct.rangePrice;
     },
     setRangePrices: (state, action: PayloadAction<IRangePrice>) => {
-      state.rangePrice = action.payload;
+      state.filterProduct.rangePrice = action.payload;
+    },
+    setFilterForRange: (state, action: PayloadAction<IGoods[]>) => {
+      state.filterForRange = valueMinMax(action.payload);
     },
   },
 });
 
-export const { setRangePrices, setCategory, setSearch } =
+export const { setRangePrices, setCategory, setSearch, setFilterForRange } =
   filterProductSlice.actions;
-export const selectSearch = (state: RootState) => state.filterProduct.search;
+export const selectSearch = (state: RootState) =>
+  state.filterProduct.filterProduct.search;
 export const selectCategory = (state: RootState) =>
-  state.filterProduct.category;
+  state.filterProduct.filterProduct.category;
 export const selectRangePrice = (state: RootState) =>
-  state.filterProduct.rangePrice;
+  state.filterProduct.filterProduct.rangePrice;
+export const selectFilterForRange = (state: RootState) =>
+  state.filterProduct.filterForRange;
 export default filterProductSlice.reducer;

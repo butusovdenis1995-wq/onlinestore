@@ -5,7 +5,7 @@ export function WrapperCard(props: IWrapperCardProps) {
   const { children, className } = props;
 
   return (
-    <div className={cn("rounded-2xl overflow-hidden", className)}>
+    <div className={cn("rounded-2xl overflow-hidden bg-white", className)}>
       {children}
     </div>
   );

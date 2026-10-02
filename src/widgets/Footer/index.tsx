@@ -9,7 +9,7 @@ import {
 
 export function Footer() {
   return (
-    <section className="grid grid-cols-4 gap-x-10 bg-gray-900 text-white content-px py-14 ">
+    <section className="grid grid-cols-4 gap-x-10 bg-gray-900 text-white content-px py-14">
       <div className="flexCol gap-y-2">
         <h3 className="text-xl font-bold">{descriptionShop.title}</h3>
         <span className="text-base text-gray-400">
