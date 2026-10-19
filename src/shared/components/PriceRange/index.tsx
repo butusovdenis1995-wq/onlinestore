@@ -1,7 +1,7 @@
 import { IPriceRangeProps } from "./interface";
 import { Slider } from "@/shared/ui/slider";
 import { useAppDispatch, useAppSelector } from "@/shared/config/hooks";
-import { setRangePrices } from "@/features/FilterProduct/model/filterSlice";
+import { setRangePrices } from "@/features/FilterProduct/model/filterProductSlice";
 import {
   IFilterForRange,
   IInitFilter,

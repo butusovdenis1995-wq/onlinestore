@@ -1,4 +1,4 @@
-import { IGoods } from "@/widgets/ListGoods/api/interface";
+import { IProduct } from "@/entities/Product/api/interface";
 
 interface SearchName {
   label: string;
@@ -6,7 +6,7 @@ interface SearchName {
 }
 
 export interface IFilterProductProps {
-  products?: IGoods[];
+  products?: IProduct[];
 }
 
 export interface IFilterProduct {

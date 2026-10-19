@@ -1,5 +1,5 @@
 import { AuthForm } from "@/features/AuthForm";
 
-export function AuthFormPage() {
+export default function AuthFormPage() {
   return <AuthForm />;
 }

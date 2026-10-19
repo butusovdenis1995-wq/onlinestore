@@ -7,8 +7,12 @@ import { useEditUserData } from "../../hooks/useEditUserData";
 import { Spinner } from "@/shared/ui/spinner";
 import { FormProvider, useForm } from "react-hook-form";
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useNavigate } from "react-router-dom";
+import { AppRoute } from "@/shared/config/route";
+import { RequestError } from "@/shared/components/RequestError";
 
 export function EditUserProfile() {
+  const navigate = useNavigate();
   const methods = useForm<TEditFormData>({
     resolver: valibotResolver(editFormSchema),
   });
@@ -23,7 +27,11 @@ export function EditUserProfile() {
   });
   const editUserForm = { ...userForm, formFields: formFieldsUserData };
 
-  const { editUserSubmit, isLoading } = useEditUserData();
+  const { editUserSubmit, isLoading, error } = useEditUserData();
+
+  function handelReturn() {
+    navigate(AppRoute.UserProfile);
+  }
 
   if (isLoading) {
     return (
@@ -31,9 +39,14 @@ export function EditUserProfile() {
     );
   }
 
+  if (error) {
+    return <RequestError error={error} />;
+  }
+
   return (
     <FormProvider {...methods}>
       <GeneralForm
+        handelReturn={handelReturn}
         onSubmit={editUserSubmit}
         formConfig={editUserForm}
       ></GeneralForm>

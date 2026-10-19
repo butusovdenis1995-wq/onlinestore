@@ -9,26 +9,32 @@ import { notifyToast } from "@/shared/lib/notify/notify";
 export function useEditUserData() {
   const setDataUserDispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.userData.userData);
+
   const navigate = useNavigate();
-  const [editUser, { isError, isLoading }] = useEditUserDataMutation();
+
+  const [editUser, { error, isLoading }] = useEditUserDataMutation();
+
   async function editUserSubmit(data: TEditFormData) {
     const validDataUser = Object.fromEntries(
       Object.entries(data).filter((fields) => fields.at(1)),
     );
+
     if (Object.keys(validDataUser).length === 0) {
       notifyToast.warning("Нет изменений", "Вы не изменили ни одного поля");
       return;
     }
+
     const id = userData?.id;
     const requestData = { validDataUser, id };
+
     try {
       const response = await editUser(requestData).unwrap();
       setDataUserDispatch(setDataUser(response));
       notifyToast.success("Данные профиля успешно изменены");
       navigate(AppRoute.UserProfile);
-    } catch (e) {
-      console.error(e);
+    } catch {
+      console.error("Ошибочка");
     }
   }
-  return { isError, isLoading, editUserSubmit };
+  return { error, isLoading, editUserSubmit };
 }

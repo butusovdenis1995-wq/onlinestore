@@ -1,6 +1,6 @@
-import { ICategories } from "@/widgets/Сategories/api/interface";
+import { ICategory } from "@/widgets/Сategories/api/interface";
 
 export interface ICategoryFilterProps {
   label: string;
-  categoryList: ICategories[];
+  categoryList: ICategory[];
 }

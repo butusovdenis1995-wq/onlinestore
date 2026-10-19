@@ -4,12 +4,16 @@ import { Field, FieldError, FieldLabel } from "@/shared/ui/field";
 import { Eye } from "lucide-react";
 import { Input } from "@/shared/ui/input";
 import { ChangeEvent, useState } from "react";
+import { useIsAvailableLogIn } from "@/features/RegistrationForm/hooks/useIsAvailabelLogIn";
+import { useLocation } from "react-router-dom";
 
 export function InputField<TData extends FieldValues>(
   props: IInputFieldProps<TData>,
 ) {
-  const { field, fieldForm, fieldState } = props;
+  const { field, fieldForm, fieldState, clearErrors, setError } = props;
   const [showPassword, setShowPassword] = useState("password");
+
+  const { pathname } = useLocation();
 
   function changeShowPassword() {
     setShowPassword((prev) => (prev === "password" ? "text" : "password"));
@@ -40,6 +44,24 @@ export function InputField<TData extends FieldValues>(
     );
   }
 
+  const { isAvailableLogin } = useIsAvailableLogIn(
+    fieldForm.type,
+    field?.value,
+  );
+
+  async function isAvailable() {
+    if (pathname !== "/registrationForm" || fieldForm.type !== "email") return;
+    const isAvailable = await isAvailableLogin();
+    if (field && isAvailable) {
+      setError(field.name, {
+        type: "manual",
+        message: "Этот email уже занят",
+      });
+    } else {
+      clearErrors(field?.name);
+    }
+  }
+
   return (
     <Field className="relative" data-invalid={fieldState?.invalid}>
       {fieldForm.type === "password" && (
@@ -65,6 +87,7 @@ export function InputField<TData extends FieldValues>(
         value={field?.value ?? ""}
         aria-invalid={fieldState?.invalid}
         onChange={(event) => handleInput(event)}
+        onBlur={isAvailable}
       />
       {fieldState?.invalid && <FieldError errors={[fieldState?.error]} />}
     </Field>

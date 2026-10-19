@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { AppRoute } from "@/shared/config/route";
 
 export function useRegistrationForm() {
-  const [creationUser, { isLoading: isLoadingReg, isError: isErrorReg }] =
+  const [regUser, { isLoading: isLoadingReg, error: errorReg }] =
     useRegistrationUserMutation();
-  const [authUser, { isLoading: isLoadingAuth, isError: isErrorAuth }] =
+  const [authUser, { isLoading: isLoadingAuth, error: errorAuth }] =
     useAuthUserMutation();
-  const [getUser, { isLoading: isLoadingUser, isError: isErrorUser }] =
+  const [getUser, { isLoading: isLoadingUser, error: errorUser }] =
     useLazyGetUserDataQuery();
 
   const authTokenDispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export function useRegistrationForm() {
     try {
       const { avatar, email, name, password, role } = data;
       const dataForRequest = { name, email, password, avatar, role };
-      await creationUser(dataForRequest).unwrap();
+      await regUser(dataForRequest).unwrap();
       try {
         const response = await authUser({ email, password }).unwrap();
         const { access_token, refresh_token } = response;
@@ -33,15 +33,15 @@ export function useRegistrationForm() {
         setDataUserDispatch(setDataUser(responseUserData));
         navigate(AppRoute.Catalog);
       } catch {
-        throw new Error("error 1");
+        console.error("error");
       }
     } catch {
-      throw new Error("error 2");
+      console.error("error");
     }
   }
 
-  const isError = isErrorReg || isErrorAuth || isErrorUser;
+  const error = errorReg || errorAuth || errorUser;
   const isLoading = isLoadingAuth || isLoadingReg || isLoadingUser;
 
-  return { onSubmitReg, isLoading, isError };
+  return { onSubmitReg, isLoading, error };
 }

@@ -44,7 +44,7 @@ export function Footer() {
         <h3 className="text-xl text-white font-bold">{contacts.title}</h3>
         <div className="flex gap-x-2">
           {contacts.media.map((media) => (
-            <Link key={media.link} to={media.link}>
+            <Link key={media.key} to={media.link}>
               <media.icon />
             </Link>
           ))}

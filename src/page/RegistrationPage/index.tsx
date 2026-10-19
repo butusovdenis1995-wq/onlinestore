@@ -1,5 +1,5 @@
 import { RegistrationForm } from "@/features/RegistrationForm";
 
-export function RegistrationFormPage() {
+export default function RegistrationFormPage() {
   return <RegistrationForm />;
 }

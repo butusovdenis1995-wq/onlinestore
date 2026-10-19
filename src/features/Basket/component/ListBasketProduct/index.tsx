@@ -5,6 +5,7 @@ export function ListBasketProduct() {
   const listProductInBasket = useAppSelector(
     (state) => state.addBasket.products,
   );
+
   return (
     <div className="col-span-2">
       {listProductInBasket.map((product) => (

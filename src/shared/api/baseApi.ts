@@ -5,5 +5,6 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.escuelajs.co/api/v1/",
   }),
+  tagTypes: ["Product"],
   endpoints: () => ({}),
 });

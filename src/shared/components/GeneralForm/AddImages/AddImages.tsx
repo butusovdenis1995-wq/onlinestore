@@ -8,6 +8,7 @@ import { IAddImagesFieldsProps } from "./interface";
 import { Field, FieldError, FieldLabel } from "@/shared/ui/field";
 import { cn } from "@/shared/lib/cn";
 import { TagGeneral } from "../../TagGeneral/TagGeneral";
+import { Img } from "../../Img";
 
 export function AddImagesFields(props: IAddImagesFieldsProps) {
   const { buttonAction, label, subtitle, placeholder, required, mode } = props;
@@ -44,7 +45,7 @@ export function AddImagesFields(props: IAddImagesFieldsProps) {
   return (
     <div>
       {mode === "edit" && (
-        <img
+        <Img
           className="mb-4 rounded-2xl"
           src={images.at(0)}
           alt="ProductGeneral"
@@ -74,7 +75,7 @@ export function AddImagesFields(props: IAddImagesFieldsProps) {
                 key={image}
                 className="group relative w-25 h-37 overflow-hidden"
               >
-                <img
+                <Img
                   onClick={() => selectionGeneralImage(image)}
                   className={cn(
                     "w-full h-full object-cover rounded-2xl",
@@ -82,6 +83,7 @@ export function AddImagesFields(props: IAddImagesFieldsProps) {
                   )}
                   src={image}
                 />
+
                 <Button
                   onClick={() => removeImage(image)}
                   variant={"destructive"}

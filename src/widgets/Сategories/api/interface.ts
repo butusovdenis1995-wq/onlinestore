@@ -1,4 +1,4 @@
-export interface ICategories {
+export interface ICategory {
   creationAt: string;
   id: number;
   image: string;

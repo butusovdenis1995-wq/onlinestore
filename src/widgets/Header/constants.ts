@@ -1,5 +1,4 @@
-import { LogOut } from "lucide-react";
-import { ILinkNav, ILoginButtons } from "./interface";
+import { ILinkNav } from "./interface";
 import { AppRoute } from "@/shared/config/route";
 
 export const headerNav: ILinkNav[] = [

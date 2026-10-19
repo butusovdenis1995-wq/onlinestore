@@ -4,9 +4,9 @@ import { ImagesCarousel } from "@/shared/components/ImagesCarousel";
 import { ProductDescription } from "@/shared/components/ProductDescription";
 import { buttonStepBack } from "./constants";
 import { ChevronLeftIcon } from "lucide-react";
-import { AddBasket } from "@/features/AddBasket";
 import { IProductCardProps } from "../../api/interface";
 import { Button } from "@/shared/ui/button";
+import { AddBasket } from "@/features/Basket";
 
 export function ProductCard(props: IProductCardProps) {
   const { product, setMode, state } = props;

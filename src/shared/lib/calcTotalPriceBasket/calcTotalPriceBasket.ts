@@ -1,4 +1,4 @@
-import { TProductInBasket } from "@/features/AddBasket/model/interface";
+import { TProductInBasket } from "@/features/Basket/interface";
 
 export function calcTotalPriceBasket(
   listProductBasket: TProductInBasket[],

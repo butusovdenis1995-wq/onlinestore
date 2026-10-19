@@ -63,14 +63,17 @@ export const contacts: IContactsInfo = {
     {
       icon: SiFacebook,
       link: "/",
+      key: "SiFacebook",
     },
     {
       icon: SiInstagram,
       link: "/",
+      key: "SiInstagram",
     },
     {
       icon: SiX,
-      link: "",
+      link: "/",
+      key: "SiX",
     },
   ],
   contacts: {

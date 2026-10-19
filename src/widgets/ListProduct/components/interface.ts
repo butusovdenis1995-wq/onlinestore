@@ -1,4 +1,4 @@
-import { IProduct } from "../api/interface";
+import { IProduct } from "@/entities/Product/api/interface";
 
 export interface IListProductProps {
   products: IProduct[];

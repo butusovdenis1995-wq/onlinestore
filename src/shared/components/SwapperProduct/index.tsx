@@ -2,9 +2,10 @@ import { useState } from "react";
 import { ISwapperProductProps } from "./interface";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { cn } from "@/shared/lib/cn";
+import { Img } from "../Img";
 
 export function SwapperProduct(props: ISwapperProductProps) {
-  const { images, handleClick } = props;
+  const { images, handleClick, isPriority } = props;
   const [currentIndex, setCurrentImage] = useState(0);
 
   function ForwardHandle() {
@@ -20,21 +21,28 @@ export function SwapperProduct(props: ISwapperProductProps) {
   }
 
   return (
-    <div className="relative overflow-hidden h-[50%]">
+    <div className="group relative overflow-hidden h-[50%]">
       <button
-        className="group z-30 flexCenter absolute left-2 top-25 size-8 rounded-full bg-white/35 text-3xl text-black/90 hover:scale-110 transform duration-300"
+        className="group z-30 flexCenter absolute left-2 top-25 size-8 rounded-full ,
+         bg-white/35 text-3xl text-black/90 hover:scale-110 transform duration-300 ,
+          opacity-0 group-hover:opacity-100"
         onClick={BackHandle}
       >
         <ChevronLeft />
       </button>
-      <img
+      <Img
         onClick={handleClick}
         className="size-full object-cover hover:scale-105 transition duration-300"
         src={images[currentIndex]}
         alt="Logo"
+        loading={isPriority ? "eager" : "lazy"}
+        fetchPriority={isPriority ? "high" : "auto"}
       />
+
       <button
-        className="group z-30 flexCenter absolute right-2 top-25 size-8 rounded-full bg-white/35 text-3xl text-black/90 hover:scale-110 transform duration-300"
+        className="group z-30 flexCenter absolute right-2 top-25 size-8 rounded-full bg-white/35 text-3xl ,
+         text-black/90 hover:scale-110 transform duration-300 ,
+         opacity-0 group-hover:opacity-100"
         onClick={ForwardHandle}
       >
         <ChevronRight />
@@ -44,7 +52,7 @@ export function SwapperProduct(props: ISwapperProductProps) {
           <div
             key={image}
             className={cn(
-              "size-2 bg-gray-500 border border-white/70 rounded-full",
+              "size-2 bg-gray-500 border border-white/70 rounded-full opacity-0 group-hover:opacity-100",
               currentIndex === index ? "scale-135" : "",
             )}
             onClick={() => {

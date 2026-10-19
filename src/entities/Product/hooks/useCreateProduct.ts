@@ -1,9 +1,9 @@
-import { ICategories } from "@/widgets/Сategories/api/interface";
+import { ICategory } from "@/widgets/Сategories/api/interface";
 import { useCreateProductMutation } from "../api/apiProduct";
 import { TCreateProductSchema } from "../components/CreateProduct/createProductSchema";
 
-export function useCreateProduct(categories: ICategories[]) {
-  const [createProduct] = useCreateProductMutation();
+export function useCreateProduct(categories: ICategory[]) {
+  const [createProduct, { error, isLoading }] = useCreateProductMutation();
   async function onSubmit(data: TCreateProductSchema) {
     const requestDataProduct = {
       ...data,
@@ -17,5 +17,5 @@ export function useCreateProduct(categories: ICategories[]) {
       console.error("Error");
     }
   }
-  return { onSubmit };
+  return { onSubmit, error, isLoading };
 }

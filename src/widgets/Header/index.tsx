@@ -12,10 +12,7 @@ import { useAppSelector } from "@/shared/config/hooks";
 export function Header() {
   const navigate = useNavigate();
 
-  const { userData, authStatus } = useAppSelector((state) => state.userData);
-
-  console.log(userData);
-  console.log(authStatus);
+  const { userData } = useAppSelector((state) => state.userData);
 
   function isHiddenButton(isAuth: boolean) {
     return !!userData === isAuth;

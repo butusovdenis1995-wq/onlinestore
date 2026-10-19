@@ -20,6 +20,7 @@ export type ICompany = IForByers;
 interface IContactsMedia {
   link: string;
   icon: ComponentType;
+  key: string;
 }
 
 interface IContacts {

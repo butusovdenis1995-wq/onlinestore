@@ -1,6 +1,7 @@
-import { IProduct } from "@/widgets/ListProduct/api/interface";
+import { IProduct } from "../../api/interface";
 
 export interface IProductProps {
   product: IProduct;
   pathname: string;
+  isPriority: boolean;
 }

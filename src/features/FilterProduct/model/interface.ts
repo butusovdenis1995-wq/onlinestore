@@ -8,9 +8,11 @@ export interface IFilterForRange {
   max: number | null;
 }
 
+export type TCategory = Record<"categoryRequest" | "categoryName", string>;
+
 export interface IInitFilter {
   search: string;
-  category: string;
+  category: TCategory;
   rangePrice: IRangePrice;
 }
 

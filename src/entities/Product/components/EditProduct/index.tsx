@@ -11,6 +11,7 @@ import { ButtonForm } from "@/shared/components/ButtonForm/ButtonForm";
 import { buttonFormEditProduct } from "./constants";
 import { useEditProduct } from "../../hooks/useEditProduct";
 import { Spinner } from "@/shared/ui/spinner";
+import { RequestError } from "@/shared/components/RequestError";
 
 export function EditProduct(props: IProductCardProps) {
   const { product, setMode, categories } = props;
@@ -25,7 +26,7 @@ export function EditProduct(props: IProductCardProps) {
       price,
       description,
       images,
-      categoryId: category.name,
+      categoryId: category?.name,
     },
   });
 
@@ -35,11 +36,20 @@ export function EditProduct(props: IProductCardProps) {
     setMode("demonstration");
   }
 
-  const { onSubmit, isLoading } = useEditProduct(categories ?? [], product.id);
+  const { onSubmit, isLoading, error } = useEditProduct(
+    categories ?? [],
+    product.id,
+    setMode,
+  );
 
   if (isLoading) {
     return <Spinner />;
   }
+
+  if (error) {
+    return <RequestError error={error} />;
+  }
+
   return (
     <section className="grid grid-cols-2 gap-6 mt-13">
       <FormProvider {...methods}>

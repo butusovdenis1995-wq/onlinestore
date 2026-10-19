@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { ISearchProductProps } from "./interface";
 import debounce from "lodash/debounce";
 import { useAppDispatch } from "@/shared/config/hooks";
-import { setSearch } from "@/features/FilterProduct/model/filterSlice";
+import { setSearch } from "@/features/FilterProduct/model/filterProductSlice";
 
 export function SearchProduct(props: ISearchProductProps) {
   const { label, icon: Icon, placeholder } = props;

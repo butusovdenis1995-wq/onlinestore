@@ -1,42 +1,22 @@
 import { getRouteProduct } from "@/shared/config/route";
-import { IProductInBasketProps } from "./interface";
+import { IProductInBasketProps } from "../../interface";
 import { Link } from "react-router-dom";
 import { QuantityManageProduct } from "@/shared/components/QuantityManageProduct";
-import { useAppDispatch } from "@/shared/config/hooks";
-import {
-  deleteProduct,
-  increaseProduct,
-  removeProduct,
-} from "@/features/AddBasket/model/addBasketSlice";
 import { productCartContent } from "./constants";
 import { Button } from "@/shared/ui/button";
 import { Trash2 } from "lucide-react";
 import { WrapperCard } from "@/shared/components/WrapperCard";
+import { useProductBasket } from "@/features/Basket/hooks/useProductBasket";
+import { Img } from "@/shared/components/Img";
 
 export function ProductInBasket(props: IProductInBasketProps) {
   const { productInBasket } = props;
-  const dispatch = useAppDispatch();
 
-  function changeBasketProduct(event: React.MouseEvent<HTMLButtonElement>) {
-    const { currentTarget } = event;
-    if (currentTarget.name === "increaseProduct") {
-      dispatch(increaseProduct(productInBasket.id));
-    }
-    if (currentTarget.name === "removeProduct" && productInBasket) {
-      if (productInBasket?.quantity > 1) {
-        dispatch(removeProduct(productInBasket.id));
-      } else {
-        dispatch(deleteProduct(productInBasket.id));
-      }
-    }
-    if (currentTarget.name === "deleteProduct") {
-      dispatch(deleteProduct(productInBasket.id));
-    }
-  }
+  const { changeBasketProduct } = useProductBasket(productInBasket);
 
   return (
     <WrapperCard className="flex gap-4 p-4 h-45 border border-gray-400 mb-4 shadow-md">
-      <img
+      <Img
         className="rounded-sm"
         src={productInBasket.images.at(0)}
         alt="Logo"
@@ -64,8 +44,8 @@ export function ProductInBasket(props: IProductInBasketProps) {
         </div>
         <Button
           onClick={changeBasketProduct}
-          className="mt-auto text-red-600 text-base"
-          variant={"transparent"}
+          className="mt-auto"
+          variant={"destructive"}
           name="deleteProduct"
         >
           <Trash2 className="size-4 mr-2" />

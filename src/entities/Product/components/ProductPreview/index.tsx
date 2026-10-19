@@ -8,7 +8,7 @@ import { Button } from "@/shared/ui/button";
 import { ConfirmDialog } from "@/shared/components/ConfirmDialog";
 
 export function ProductPreview(props: IProductProps) {
-  const { product, pathname } = props;
+  const { product, pathname, isPriority } = props;
   const { description, id, images, price, title } = product;
   const navigate = useNavigate();
 
@@ -20,7 +20,11 @@ export function ProductPreview(props: IProductProps) {
 
   return (
     <WrapperCard className="w-70 h-120 flex flex-col border border-gray-400 shadow-md">
-      <SwapperProduct images={images} handleClick={() => handleClick(id)} />
+      <SwapperProduct
+        images={images}
+        handleClick={() => handleClick(id)}
+        isPriority={isPriority}
+      />
       <div className="flexCol p-4 gap-4 flex-1">
         <h3 className="text-lg font-medium text-gray-900">{title}</h3>
         <p className="text-base text-gray-700">{trimText(description, 70)}</p>

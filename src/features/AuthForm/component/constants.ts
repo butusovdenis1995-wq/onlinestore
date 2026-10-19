@@ -35,3 +35,5 @@ export const messageErrorFormValidation = {
   errorIncorrectPassword: "Неправильный пароль",
   errorEmailMessage: "Введите корректный email",
 };
+
+export const errorAuthForm = "Неверный логин или пароль. Попробуйте ещё раз.";

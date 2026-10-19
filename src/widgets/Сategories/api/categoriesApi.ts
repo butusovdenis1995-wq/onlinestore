@@ -1,9 +1,9 @@
 import { baseApi } from "@/shared/api/baseApi";
-import { ICategories } from "./interface";
+import { ICategory } from "./interface";
 
 export const categoriesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCategories: build.query<ICategories[], void>({
+    getCategories: build.query<ICategory[], void>({
       query: () => ({ url: "categories" }),
     }),
   }),

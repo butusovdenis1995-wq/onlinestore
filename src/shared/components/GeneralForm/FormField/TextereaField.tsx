@@ -1,11 +1,11 @@
 import { FieldValues } from "react-hook-form";
-import { IInputFieldProps } from "../interface";
+import { ITextareaFieldProps } from "../interface";
 import { Field, FieldError, FieldLabel } from "@/shared/ui/field";
 import { ChangeEvent } from "react";
 import { Textarea } from "@/shared/ui/textarea";
 
 export function TextareaField<TData extends FieldValues>(
-  props: IInputFieldProps<TData>,
+  props: ITextareaFieldProps<TData>,
 ) {
   const { field, fieldForm, fieldState } = props;
 

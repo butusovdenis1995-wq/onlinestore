@@ -8,13 +8,15 @@ import { CheckboxField } from "../FormField/CheckboxField";
 import { SelectField } from "../FormField/SelectField";
 import { InputField } from "../FormField/InputField";
 import { ButtonForm } from "../../ButtonForm/ButtonForm";
+import { TextareaField } from "../FormField/TextereaField";
 
 export function GeneralForm<TData extends FieldValues>(
   props: IGeneralFormProps<TData>,
 ) {
-  const { className, formConfig, onSubmit, formId } = props;
+  const { className, formConfig, onSubmit, formId, handelReturn } = props;
 
-  const { handleSubmit, control } = useFormContext<TData>();
+  const { handleSubmit, control, setError, clearErrors } =
+    useFormContext<TData>();
 
   const { buttonForm, formFields, subtitle, title, mode } = formConfig;
 
@@ -58,18 +60,32 @@ export function GeneralForm<TData extends FieldValues>(
                   );
                 }
 
+                if (fieldForm.type === "textarea") {
+                  return (
+                    <TextareaField
+                      field={field}
+                      fieldState={fieldState}
+                      fieldForm={fieldForm}
+                    />
+                  );
+                }
+
                 return (
                   <InputField
                     field={field}
                     fieldState={fieldState}
                     fieldForm={fieldForm}
+                    setError={setError}
+                    clearErrors={clearErrors}
                   />
                 );
               }}
             />
           );
         })}
-        {mode !== "createProduct" && <ButtonForm mode={mode} {...buttonForm} />}
+        {mode !== "createProduct" && (
+          <ButtonForm handelReturn={handelReturn} mode={mode} {...buttonForm} />
+        )}
       </WrapperCard>
     </form>
   );

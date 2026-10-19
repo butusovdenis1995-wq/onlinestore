@@ -2,6 +2,7 @@ import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button";
 import { useState } from "react";
 import { IImagesCarouselProps } from "./interface";
+import { Img } from "../Img";
 
 export function ImagesCarousel(props: IImagesCarouselProps) {
   const { images, className } = props;
@@ -14,7 +15,7 @@ export function ImagesCarousel(props: IImagesCarouselProps) {
 
   return (
     <section className={cn("flex flex-col mb-14", className)}>
-      <img
+      <Img
         className="mb-4 rounded-2xl"
         src={images.at(currentImage)}
         alt="Product"

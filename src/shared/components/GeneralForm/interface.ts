@@ -3,6 +3,8 @@ import {
   ControllerRenderProps,
   FieldPath,
   FieldValues,
+  UseFormClearErrors,
+  UseFormSetError,
 } from "react-hook-form";
 
 type TBaseField<T extends FieldValues> = {
@@ -48,8 +50,15 @@ export interface IInputFieldProps<
   TData extends FieldValues,
 > extends IFormFieldProps<TData> {
   fieldForm: TInputField<TData>;
+  setError: UseFormSetError<TData>;
+  clearErrors: UseFormClearErrors<TData>;
 }
 
+export interface ITextareaFieldProps<
+  TData extends FieldValues,
+> extends IFormFieldProps<TData> {
+  fieldForm: TInputField<TData>;
+}
 export interface ISelectFieldProps<
   TData extends FieldValues,
 > extends IFormFieldProps<TData> {
@@ -82,6 +91,7 @@ export interface IGeneralFormProps<T extends FieldValues> {
   formConfig: IFormConfig<T>;
   onSubmit: (data: T) => void | Promise<void>;
   formId?: string;
+  handelReturn: () => void;
 }
 
 export type IFormTitleProps<T extends FieldValues> = Pick<

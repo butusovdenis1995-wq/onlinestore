@@ -9,14 +9,14 @@ export function CheckboxField<TData extends FieldValues>(
 ) {
   const { field, fieldForm, fieldState } = props;
   return (
-    <Field orientation="horizontal" data-invalid={fieldState.invalid}>
+    <Field orientation="horizontal" data-invalid={fieldState?.invalid}>
       <Checkbox
         className="size-5 mr-2"
-        checked={field.value}
-        onCheckedChange={field.onChange}
-        onBlur={field.onBlur}
+        checked={field?.value}
+        onCheckedChange={field?.onChange}
+        onBlur={field?.onBlur}
       />
-      <FieldLabel htmlFor={field.name}>
+      <FieldLabel htmlFor={field?.name}>
         {typeof fieldForm.label === "object" ? (
           <div>
             <span>{fieldForm.label.agree}</span>
@@ -31,7 +31,7 @@ export function CheckboxField<TData extends FieldValues>(
           <span>{fieldForm.label}</span>
         )}
       </FieldLabel>
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+      {fieldState?.invalid && <FieldError errors={[fieldState.error]} />}
     </Field>
   );
 }

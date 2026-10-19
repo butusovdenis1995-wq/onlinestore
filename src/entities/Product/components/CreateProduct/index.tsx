@@ -11,9 +11,14 @@ import { FormProvider, useForm } from "react-hook-form";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { ButtonForm } from "@/shared/components/ButtonForm/ButtonForm";
 import { useCreateProduct } from "../../hooks/useCreateProduct";
+import { useNavigate } from "react-router-dom";
+import { AppRoute } from "@/shared/config/route";
+import { Spinner } from "@/shared/ui/spinner";
+import { RequestError } from "@/shared/components/RequestError";
 
 export function CreateProduct(props: ICreateProductProps) {
   const { categories } = props;
+  const navigate = useNavigate();
 
   const methods = useForm<TCreateProductSchema>({
     resolver: valibotResolver(createProductSchema),
@@ -38,7 +43,19 @@ export function CreateProduct(props: ICreateProductProps) {
     [categories],
   );
 
-  const { onSubmit } = useCreateProduct(categories);
+  const { onSubmit, error, isLoading } = useCreateProduct(categories);
+
+  function handelReturn() {
+    navigate(AppRoute.ProductManagement);
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <RequestError error={error} />;
+  }
 
   return (
     <FormProvider {...methods}>
@@ -48,10 +65,12 @@ export function CreateProduct(props: ICreateProductProps) {
           formConfig={formattedCreateProduct}
           className="w-full"
           formId="create-product-form"
+          handelReturn={handelReturn}
         />
         <AddImagesFields mode="create" {...contentFormAddImages} />
         <ButtonForm
           formId="create-product-form"
+          handelReturn={handelReturn}
           mode={formattedCreateProduct.mode}
           {...formattedCreateProduct.buttonForm}
         />

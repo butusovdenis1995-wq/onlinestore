@@ -2,6 +2,7 @@ import { useAppSelector } from "@/shared/config/hooks";
 import { cn } from "@/shared/lib/cn";
 import { IUserLogoProps } from "./interface";
 import { initialsUser } from "@/shared/lib/initialsUser";
+import { Img } from "../Img";
 
 export function UserLogo(props: IUserLogoProps) {
   const { className } = props;
@@ -11,7 +12,7 @@ export function UserLogo(props: IUserLogoProps) {
 
   return (
     <div className={cn("rounded-full overflow-hidden", className)}>
-      <img
+      <Img
         className="w-full h-full object-cover"
         src={avatar}
         alt={initialsUser(name)}

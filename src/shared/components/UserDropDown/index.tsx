@@ -54,7 +54,9 @@ export function UserDropDown(props: IUserData) {
               <Link
                 className="flex items-center gap-x-4 w-full"
                 to={link.link}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                }}
               >
                 <link.logo />
                 {link.label}
