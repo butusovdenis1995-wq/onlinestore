@@ -5,6 +5,7 @@ import { useInitializeAuth } from "@/shared/hooks/useInitializeAuth";
 import { lazy, Suspense, useEffect } from "react";
 import { RoleRoute } from "./RoleRoute";
 import { Spinner } from "@/shared/ui/spinner";
+import { About } from "@/page/About";
 
 const Layout = lazy(() => import("./Layout"));
 const HomePage = lazy(() => import("@/page/HomePage"));
@@ -46,6 +47,7 @@ function App() {
             element={<RegistrationFormPage />}
           />
           <Route path={AppRoute.AuthForm} element={<AuthFormPage />} />
+          <Route path={AppRoute.About} element={<About />} />
           <Route element={<ProtectedRoute />}>
             <Route path={AppRoute.UserProfile} element={<UserProfilePage />} />
             <Route
