@@ -16,6 +16,7 @@ export function ProductCard(props: IProductCardProps) {
       <Link
         className="flex gap-x-2 text-base text-gray-600 mb-6"
         to={AppRoute.Catalog}
+        state={{ scrollY: state.scrollY }}
       >
         <>
           <ChevronLeftIcon />

@@ -9,8 +9,22 @@ import {
 
 export function PriceRange(props: IPriceRangeProps) {
   const { label } = props;
-  const valueRange = useAppSelector((state) => state.filterProduct);
+  const { filterProduct, filterForRange } = useAppSelector(
+    (state) => state.filterProduct,
+  );
   const dispatch = useAppDispatch();
+
+  function changeableValueRange(
+    init: IFilterForRange,
+    dynamic: IInitFilter,
+  ): number[] {
+    const { priceMin, priceMax } = dynamic.rangePrice;
+    if (priceMin && priceMax) {
+      return Object.values(dynamic.rangePrice);
+    } else return Object.values(init);
+  }
+
+  const currentValueRange = changeableValueRange(filterForRange, filterProduct);
 
   function handlerRange(value: number[]) {
     dispatch(
@@ -20,19 +34,6 @@ export function PriceRange(props: IPriceRangeProps) {
       }),
     );
   }
-
-  const { filterProduct, filterForRange } = valueRange;
-
-  function changeableValueRange(
-    init: IFilterForRange,
-    dynamic: IInitFilter,
-  ): number[] {
-    if (Object.values(dynamic.rangePrice).every((rangeValue) => rangeValue)) {
-      return Object.values(dynamic.rangePrice);
-    } else return Object.values(init);
-  }
-
-  const currentValueRange = changeableValueRange(filterForRange, filterProduct);
 
   return (
     <div className="flex flex-col gap-3">

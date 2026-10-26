@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { ScrollToTop } from "./ScrollToTop";
+import { ScrollTo } from "./ScrollToTo";
 import { Header } from "@/widgets/Header";
 import { Toaster } from "sonner";
 import { Footer } from "@/widgets/Footer";
@@ -7,7 +7,7 @@ import { Footer } from "@/widgets/Footer";
 export default function Layout() {
   return (
     <>
-      <ScrollToTop />
+      <ScrollTo />
       <Header />
       <main className="main">
         <Outlet />

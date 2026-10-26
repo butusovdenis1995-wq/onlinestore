@@ -13,11 +13,16 @@ export interface IProduct {
 
 export type TSetModeProductCard = "demonstration" | "edit";
 
+type TState = {
+  from: "/catalog" | "/productManagement";
+  scrollY: number;
+};
+
 export interface IProductCardProps {
   product: IProduct;
   className?: string;
   setMode: React.Dispatch<React.SetStateAction<TSetModeProductCard>>;
   mode: TSetModeProductCard;
-  state: Record<"from", "/catalog" | "/productManagement">;
+  state: TState;
   categories?: ICategory[];
 }

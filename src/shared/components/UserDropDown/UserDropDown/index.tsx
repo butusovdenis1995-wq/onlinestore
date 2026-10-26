@@ -8,10 +8,10 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
 import { Link } from "react-router-dom";
-import { UserMenu } from "../UserMenu";
-import { UserLogo } from "../UserLogo";
+import { UserMenu } from "../../UserMenu";
+import { UserLogo } from "../../UserLogo";
 import { IUserData } from "@/entities/UserProfile/model/interface";
-import { UserDropDownContent } from "./constants";
+import { UserDropDownContent } from "../constants";
 import { useHandelButtonAuth } from "@/shared/hooks/useHandelButtonAuth";
 import { useAppSelector } from "@/shared/config/hooks";
 import { useState } from "react";

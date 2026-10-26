@@ -3,62 +3,30 @@ import { FilterProduct } from "@/features/FilterProduct";
 import { useAppDispatch, useAppSelector } from "@/shared/config/hooks";
 import { setFilterForRange } from "@/features/FilterProduct/model/filterProductSlice";
 import { IListProductProps } from "./interface";
-import { useLocation } from "react-router-dom";
 import { SortedProduct } from "@/features/SortedProduct";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSortedProducts } from "../hooks/useSortedProduct";
+import { useScrollObserver } from "@/shared/hooks/useScrollObserver";
 
 export function ListProduct(props: IListProductProps) {
   const { products } = props;
-  const [sortProducts, setSortProducts] = useState(() => products);
+
   const filterProduct = useAppSelector(
     (state) => state.filterProduct.filterProduct,
   );
   const dispatch = useAppDispatch();
-  const { pathname } = useLocation();
 
   const { priceMax, priceMin } = filterProduct.rangePrice;
 
+  const { sortedProducts, sortedProduct } = useSortedProducts(products);
+
   useEffect(() => {
-    if (
-      products.length > 0 &&
-      Object.values(filterProduct.rangePrice).every((rangeValue) => !rangeValue)
-    ) {
+    if (products.length > 0 && !priceMax && !priceMin) {
       dispatch(setFilterForRange(products));
     }
-  }, [products, priceMin, priceMax, dispatch]);
+  }, [products, priceMax, priceMin, dispatch]);
 
-  if (
-    products &&
-    Object.values(filterProduct.rangePrice).every((rangeValue) => !rangeValue)
-  ) {
-    dispatch(setFilterForRange(products));
-  }
-
-  function sortedProduct(sort: string) {
-    switch (sort) {
-      case "По убыванию цены": {
-        setSortProducts((sortProducts) =>
-          sortProducts.toSorted((a, b) => b.price - a.price),
-        );
-        break;
-      }
-      case "По возрастанию цены": {
-        setSortProducts((sortProducts) =>
-          sortProducts.toSorted((a, b) => a.price - b.price),
-        );
-        break;
-      }
-      case "По названию": {
-        setSortProducts((sortProducts) =>
-          sortProducts.toSorted((a, b) => a.title.localeCompare(b.title)),
-        );
-        break;
-      }
-      case "По умолчанию": {
-        setSortProducts(products);
-      }
-    }
-  }
+  const { scrollY } = useScrollObserver();
 
   return (
     <section className="content-px flex gap-5">
@@ -67,11 +35,11 @@ export function ListProduct(props: IListProductProps) {
         <SortedProduct sortedProduct={sortedProduct} className="mt-6 h-10" />
       </div>
       <div className=" grid grid-cols-3 gap-5">
-        {sortProducts?.map((product, index) => (
+        {sortedProducts?.map((product, index) => (
           <ProductPreview
+            scrollY={scrollY}
             key={product.id}
             product={product}
-            pathname={pathname}
             isPriority={index <= 6}
           />
         ))}

@@ -5,14 +5,15 @@ import { Button } from "@/shared/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { AppRoute } from "@/shared/config/route";
 import { ProductCounter } from "@/shared/components/ProductCounter";
-import { UserDropDown } from "@/shared/components/UserDropDown";
+import { UserDropDown } from "@/shared/components/UserDropDown/UserDropDown";
 import { useHandelButtonAuth } from "@/shared/hooks/useHandelButtonAuth";
 import { useAppSelector } from "@/shared/config/hooks";
+import { SkeletonUserDropDown } from "@/shared/components/UserDropDown";
 
 export function Header() {
   const navigate = useNavigate();
 
-  const { userData } = useAppSelector((state) => state.userData);
+  const { userData, authStatus } = useAppSelector((state) => state.userData);
 
   function isHiddenButton(isAuth: boolean) {
     return !!userData === isAuth;
@@ -37,7 +38,10 @@ export function Header() {
       </nav>
 
       <div className="flex items-center gap-2.5">
-        {userData && <UserDropDown {...userData} />}
+        {authStatus === "checking" && <SkeletonUserDropDown />}
+        {userData && authStatus !== "checking" && (
+          <UserDropDown {...userData} />
+        )}
 
         <Button
           className="relative mr-5"

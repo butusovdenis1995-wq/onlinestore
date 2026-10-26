@@ -2,19 +2,21 @@ import { WrapperCard } from "@/shared/components/WrapperCard";
 import { IProductProps } from "./interface";
 import { SwapperProduct } from "@/shared/components/SwapperProduct";
 import { trimText } from "@/shared/lib/trimText/trimText";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getRouteProduct } from "@/shared/config/route";
 import { Button } from "@/shared/ui/button";
 import { ConfirmDialog } from "@/shared/components/ConfirmDialog";
 
 export function ProductPreview(props: IProductProps) {
-  const { product, pathname, isPriority } = props;
+  const { product, isPriority, scrollY } = props;
   const { description, id, images, price, title } = product;
   const navigate = useNavigate();
 
+  const { pathname } = useLocation();
+
   function handleClick(id: number) {
     navigate(getRouteProduct(id), {
-      state: { from: pathname },
+      state: { from: pathname, scrollY },
     });
   }
 

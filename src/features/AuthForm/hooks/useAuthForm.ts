@@ -4,8 +4,7 @@ import { setAuthToken } from "../model/authSlice";
 import { TRegistrationFormData } from "@/features/RegistrationForm/component/regFormSchema";
 import { useLazyGetUserDataQuery } from "@/entities/UserProfile/apiUser/apiUser";
 import { setDataUser } from "@/entities/UserProfile/model/userDataSlice";
-import { useNavigate } from "react-router-dom";
-import { AppRoute } from "@/shared/config/route";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useAuthForm() {
   const [authUser, { error, isLoading }] = useAuthUserMutation();
@@ -13,6 +12,8 @@ export function useAuthForm() {
   const authTokenDispatch = useAppDispatch();
   const getUserDataDispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   async function onSubmitAuth(
     data: Pick<TRegistrationFormData, "email" | "password">,
   ) {
@@ -23,9 +24,9 @@ export function useAuthForm() {
       authTokenDispatch(setAuthToken(access_token));
       const userData = await getUserData(access_token).unwrap();
       getUserDataDispatch(setDataUser(userData));
-      navigate(AppRoute.Catalog);
+      navigate(from, { replace: true });
     } catch {
-      console.error("Ощибочка");
+      console.error("Ошибочка");
     }
   }
   return { onSubmitAuth, error, isLoading };
