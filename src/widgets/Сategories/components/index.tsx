@@ -41,7 +41,7 @@ export function Categories() {
       {categories?.map((category) => (
         <WrapperCard
           key={category.id}
-          className="size-95 relative overflow-hidden border border-gray-400 shadow-md"
+          className="relative overflow-hidden border border-gray-400 shadow-md"
         >
           <Img
             alt="Logo"

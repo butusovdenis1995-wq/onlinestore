@@ -68,7 +68,7 @@ export function InputField<TData extends FieldValues>(
         <button
           onClick={changeShowPassword}
           type="button"
-          className="absolute transparent left-95 top-9"
+          className="absolute transparent left-[17vw] top-9"
         >
           <Eye className="text-gray-600" />
         </button>

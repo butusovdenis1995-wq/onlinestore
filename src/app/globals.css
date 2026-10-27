@@ -12,8 +12,8 @@
 }
 
 .content-px {
-  padding-left: max(20px, 250px);
-  padding-right: max(20px, 250px);
+  padding-left: max(20px, 12vw);
+  padding-right: max(20px, 12vw);
 }
 
 .main {
